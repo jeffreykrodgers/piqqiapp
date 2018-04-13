@@ -54,12 +54,11 @@ export default class App extends Component<Props> {
 
   renderScrollView() {
     return (
-      <ScrollView style={styles.container}>
+      <View style={styles.container}>
         <Options/>
-      </ScrollView>
+      </View>
     );
   }
-
 
   render() {
     return (

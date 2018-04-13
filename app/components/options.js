@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {
   StyleSheet,
+  ScrollView,
   Text,
   TextInput,
   TouchableOpacity,
@@ -18,32 +19,26 @@ const colors = {
   black: "#000000"
 };
 
-let optns = [
-  {_id: 1, text: "Option 1"},
-  {_id: 2, text: "Option 2"},
-  {_id: 3, text: "Option 3"},
-  {_id: 4, text: "Option 4"},
-  {_id: 5, text: "Option 5"},
-  {_id: 6, text: "Option 6"},
-  {_id: 7, text: "Option 7"}
-];
 
 export default class Options extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      editing: false
+      editing: false,
+      options: [
+        {_id: 1, text: "Option 1"}
+      ]
     }
   }
 
   getOptions() {
-    return optns;
+    return this.state.options;
   }
 
   renderButtons() {
     return (
-      <View style={styles.buttons}>
-        <TouchableOpacity style={styles.roundButton}>
+      <View style={styles.bottomButtons}>
+        <TouchableOpacity style={styles.roundButton} onPress={this.addOption}>
           <Icon name="plus" style={styles.icon}>
           </Icon>
         </TouchableOpacity>
@@ -97,13 +92,22 @@ export default class Options extends Component {
         <LinearGradient colors={[colors.blue, colors.darkBlue]} style={styles.header}>
           <Text style={styles.prompt}>Question will go here!</Text>
         </LinearGradient>
-        <View style={styles.options}>
+        <ScrollView style={styles.options}>
           {this.renderOptions()}
-        </View>
+        </ScrollView>
         {this.renderButtons()}
       </View>
     );
   }
+
+  addOption = () => {
+    let opt = this.getOptions();
+    opt.push({_id: 2, text: "New Option"});
+
+    this.setState({
+      options: opt
+    });
+  };
 
   editCard = () => {
     this.setState({
@@ -113,7 +117,7 @@ export default class Options extends Component {
 }
 
 const styles = StyleSheet.create({
-  buttons: {
+  bottomButtons: {
     flexDirection: "row",
     position: "absolute",
     bottom: 0,
@@ -121,8 +125,9 @@ const styles = StyleSheet.create({
     width: "100%",
     alignSelf: "stretch",
     justifyContent: "space-between",
-    zIndex: 20
+    zIndex: 10
   },
+
   card: {
     backgroundColor: colors.gray,
     justifyContent: "flex-start",
@@ -164,9 +169,6 @@ const styles = StyleSheet.create({
   },
   options: {
     flex: 1,
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
     alignSelf: "stretch",
     marginTop: -24,
   },
