@@ -6,32 +6,17 @@
 
 import React, {Component} from "react";
 import {
-  Platform,
   StatusBar,
   StyleSheet,
-  ScrollView,
   TouchableOpacity,
-  Text,
   View
 } from "react-native";
 import Options from "./app/components/options";
 import Icon from "react-native-vector-icons/FontAwesome";
+import theme from "./app/styles/common.style";
 
 console.ignoredYellowBox = ["Remote debugger"];
 console.ignoredYellowBox = ["Warning: isMounted(...)"];
-
-const colors = {
-  white: "#FFFFFF",
-  blue: "#2676F5",
-  darkGray: "#202529"
-};
-
-const instructions = Platform.select({
-  ios: "Press Cmd+R to reload,\n" +
-  "Cmd+D or shake for dev menu",
-  android: "Double tap R on your keyboard to reload,\n" +
-  "Shake or press menu button for dev menu",
-});
 
 type Props = {};
 export default class App extends Component<Props> {
@@ -67,7 +52,7 @@ export default class App extends Component<Props> {
         <StatusBar
           translucent
           animated
-          backgroundColor={colors.blue}
+          backgroundColor={theme.COLOR_PRIMARY}
           barStyle="light-content"
         />
         {this.renderScrollView()}
@@ -83,7 +68,7 @@ export default class App extends Component<Props> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.darkGray,
+    backgroundColor: theme.COLOR_DARK,
   },
   settings: {
     position: "absolute",
@@ -103,7 +88,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end"
   },
   icon: {
-    color: colors.white,
+    color: theme.COLOR_LIGHT,
     fontSize: 24,
     marginHorizontal: 8,
     marginVertical: 2
